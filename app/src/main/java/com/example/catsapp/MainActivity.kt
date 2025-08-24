@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.remember
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.catsapp.ui.theme.CatsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +18,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CatsAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "cats_list_screen"
+                ) {
+                    composable("cats_list_screen") {
+                    }
+                    composable(
+                        "cat_details_screen/{catName}",
+                        arguments = listOf(navArgument("catName") {
+                            type = NavType.StringType
+                        })
+                    ) {
+                        val catName = remember {
+                            it.arguments?.getString("catName")
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CatsAppTheme {
-        Greeting("Android")
     }
 }
