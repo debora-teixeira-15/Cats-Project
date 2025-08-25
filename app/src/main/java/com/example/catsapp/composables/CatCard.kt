@@ -1,5 +1,6 @@
 package com.example.catsapp.composables
 
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,7 @@ fun CatCard(
     val referenceImageId = cat.imageId
     val imageEntry = viewModel.images[referenceImageId]
 
+    val encodedUrl = Uri.encode(imageEntry)
 
     LaunchedEffect(referenceImageId) {
         viewModel.loadImageById(referenceImageId)
@@ -45,7 +47,7 @@ fun CatCard(
                 .fillMaxWidth()
                 .height(188.dp)
                 .clip(RoundedCornerShape(10.dp))
-                .clickable(onClick = { navController.navigate("cat_details_screen/${cat.breed}") })
+                .clickable(onClick = { navController.navigate("cat_details_screen/${cat.breed}/${encodedUrl}") })
         ) {
             if(imageEntry != null) {
             AsyncImage(

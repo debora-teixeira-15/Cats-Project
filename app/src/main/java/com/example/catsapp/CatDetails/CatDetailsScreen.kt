@@ -1,5 +1,6 @@
 package com.example.catsapp.CatDetails
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +22,9 @@ import com.example.catsapp.composables.FavoriteButton
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun CatDetailsScreen(breedName: String, viewModel: CatDetailsViewModel = koinViewModel() ) {
+fun CatDetailsScreen(breedName: String, url: String, viewModel: CatDetailsViewModel = koinViewModel() ) {
+
+    val imageUrl = Uri.decode(url)
 
     viewModel.loadSpecificCat(breedName)
     val catInfo = viewModel.catBreed
@@ -45,7 +48,7 @@ fun CatDetailsScreen(breedName: String, viewModel: CatDetailsViewModel = koinVie
             }
 
             AsyncImage(
-                model = "https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg",
+                model = imageUrl,
                 contentDescription = "Cat Photo",
                 contentScale = ContentScale.Crop, modifier = Modifier
                     .padding(top = 50.dp)
