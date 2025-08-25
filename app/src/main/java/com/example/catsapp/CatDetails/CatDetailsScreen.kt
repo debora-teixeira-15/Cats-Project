@@ -47,13 +47,13 @@ fun CatDetailsScreen() {
                     .align(Alignment.CenterHorizontally)
                     .size(270.dp)
             )
-            DetaisSection()
+            DetailsSection()
         }
     }
 }
 
 @Composable
-private fun DetaisSection() {
+private fun DetailsSection() {
     Box(modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
         Column {
             Text(

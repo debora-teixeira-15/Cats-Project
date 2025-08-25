@@ -1,5 +1,6 @@
 package com.example.catsapp.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,16 +16,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 
 @Composable
-fun CatCard(url: String) {
+fun CatCard(url: String, navController: NavController) {
+    val catName = "test"
     Box(Modifier.width(200.dp).height(200.dp)) {
         Box(
             Modifier
                 .fillMaxWidth()
                 .height(188.dp)
                 .clip(RoundedCornerShape(10.dp))
+                .clickable(onClick = { navController.navigate("cat_details_screen/${catName}") })
         ) {
             AsyncImage(
                 model = url,

@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.catsapp.composables.CatCard
 import com.example.catsapp.composables.SearchBar
 
@@ -49,9 +50,11 @@ val listCats = arrayOf(
 )
 
 @Composable
-fun CatsListScreen() {
+fun CatsListScreen(navController: NavController) {
+    var search by remember { mutableStateOf("") }
+
     Column(modifier = Modifier.fillMaxSize()) {
-        SearchBar()
+        SearchBar(search = search, onValueChange = { search = it })
         FavoriteFilterButton()
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 120.dp),
@@ -60,7 +63,7 @@ fun CatsListScreen() {
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             items(listCats) { url ->
-                CatCard(url)
+                CatCard(url, navController)
             }
         }
     }
@@ -85,7 +88,7 @@ private fun FavoriteFilterButton(
         }
         Text(
             text = if (isFavoritesOnly) "Show All" else "Show Favorites Only",
-            modifier = Modifier.offset(x=2.dp, y=4.dp),
+            modifier = Modifier.offset(x = 2.dp, y = 4.dp),
             fontSize = 11.sp
         )
     }

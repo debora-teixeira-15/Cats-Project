@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = "cats_list_screen"
                 ) {
                     composable("cats_list_screen") {
-                        CatsListScreen()
+                        CatsListScreen(navController)
                     }
                     composable(
                         "cat_details_screen/{catName}",
