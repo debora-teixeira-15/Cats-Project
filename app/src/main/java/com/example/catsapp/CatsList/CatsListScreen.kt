@@ -30,7 +30,6 @@ import com.example.catsapp.composables.CatCard
 import com.example.catsapp.composables.SearchBar
 import org.koin.androidx.compose.koinViewModel
 
-
 val listCats = arrayOf(
     "https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg",
     "https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg",
@@ -57,6 +56,8 @@ fun CatsListScreen(navController: NavController,
 
     val catsList = remember { viewModel.catsList }
 
+    val filteredCatsList = catsList.value.filter { catListEntry -> catListEntry.breed.lowercase().contains(search.lowercase()) }
+
 
     Column(modifier = Modifier.fillMaxSize()) {
         SearchBar(search = search, onValueChange = { search = it })
@@ -67,7 +68,7 @@ fun CatsListScreen(navController: NavController,
             verticalArrangement = Arrangement.spacedBy(25.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            items(catsList.value) { cat ->
+            items(filteredCatsList) { cat ->
                 CatCard(cat.breed, navController)
             }
         }

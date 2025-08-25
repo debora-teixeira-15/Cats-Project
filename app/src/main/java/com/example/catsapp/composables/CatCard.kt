@@ -22,9 +22,11 @@ import coil.compose.AsyncImage
 @Composable
 fun CatCard(breed: String, navController: NavController) {
     val catName = "test"
-    Box(Modifier
-        .width(200.dp)
-        .height(200.dp)) {
+    Box(
+        Modifier
+            .width(200.dp)
+            .height(200.dp)
+    ) {
         Box(
             Modifier
                 .fillMaxWidth()
@@ -45,14 +47,14 @@ fun CatCard(breed: String, navController: NavController) {
             text = breed,
             fontSize = 11.sp,
             modifier = Modifier
-                .align(Alignment.BottomStart)
+                .align(Alignment.BottomCenter)
                 .offset(y = 7.dp)
                 .padding(start = 7.dp)
         )
         Box(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .offset(x = (-8).dp)
+                .align(Alignment.TopEnd)
+                .offset(x = (-8).dp, y = (-10).dp)
         ) {
             FavoriteButton()
         }
