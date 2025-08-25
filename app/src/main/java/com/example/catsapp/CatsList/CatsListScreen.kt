@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.catsapp.composables.CatCard
 import com.example.catsapp.composables.SearchBar
+import org.koin.androidx.compose.koinViewModel
 
 
 val listCats = arrayOf(
@@ -50,8 +51,12 @@ val listCats = arrayOf(
 )
 
 @Composable
-fun CatsListScreen(navController: NavController) {
+fun CatsListScreen(navController: NavController,
+                   viewModel: CatsListViewModel = koinViewModel()) {
     var search by remember { mutableStateOf("") }
+
+    val catsList = remember { viewModel.catsList }
+
 
     Column(modifier = Modifier.fillMaxSize()) {
         SearchBar(search = search, onValueChange = { search = it })
@@ -62,8 +67,8 @@ fun CatsListScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(25.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            items(listCats) { url ->
-                CatCard(url, navController)
+            items(catsList.value) { cat ->
+                CatCard(cat.breed, navController)
             }
         }
     }

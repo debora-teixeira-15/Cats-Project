@@ -20,9 +20,11 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 
 @Composable
-fun CatCard(url: String, navController: NavController) {
+fun CatCard(breed: String, navController: NavController) {
     val catName = "test"
-    Box(Modifier.width(200.dp).height(200.dp)) {
+    Box(Modifier
+        .width(200.dp)
+        .height(200.dp)) {
         Box(
             Modifier
                 .fillMaxWidth()
@@ -31,7 +33,7 @@ fun CatCard(url: String, navController: NavController) {
                 .clickable(onClick = { navController.navigate("cat_details_screen/${catName}") })
         ) {
             AsyncImage(
-                model = url,
+                model = "https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg",
                 contentDescription = "Cat photo",
                 contentScale = ContentScale.Crop, modifier = Modifier
                     .fillMaxWidth()
@@ -40,17 +42,17 @@ fun CatCard(url: String, navController: NavController) {
 
         }
         Text(
-            text = "Breed Name",
+            text = breed,
             fontSize = 11.sp,
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .offset(y= 7.dp)
+                .offset(y = 7.dp)
                 .padding(start = 7.dp)
         )
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .offset( x= (-8).dp)
+                .offset(x = (-8).dp)
         ) {
             FavoriteButton()
         }

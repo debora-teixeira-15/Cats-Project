@@ -58,6 +58,11 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
     implementation("androidx.compose.material3:material3:1.3.2")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.6.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.6.0")
+
     testImplementation(libs.junit)
     implementation(libs.coil.kt.compose)
     androidTestImplementation(libs.androidx.junit)
