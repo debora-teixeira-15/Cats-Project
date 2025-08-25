@@ -2,6 +2,7 @@ package com.example.catsapp.data.repository
 
 import com.example.catsapp.data.CatsApi
 import com.example.catsapp.data.responses.BreedsItem
+import com.example.catsapp.data.responses.Image
 import com.example.catsapp.utils.Resource
 import java.lang.Exception
 
@@ -21,6 +22,15 @@ class CatsRepository(
     suspend fun getSpecificBreed(id: String) : Resource<List<BreedsItem>> {
         val response = try {
             catsApi.getSpecificBreed(id)
+        } catch (e: kotlin.Exception) {
+            return Resource.Error("Error: " + e.message)
+        }
+        return Resource.Success(response)
+    }
+
+    suspend fun getImageById(id: String): Resource<Image> {
+        val response = try {
+            catsApi.getImageById(id)
         } catch (e: kotlin.Exception) {
             return Resource.Error("Error: " + e.message)
         }

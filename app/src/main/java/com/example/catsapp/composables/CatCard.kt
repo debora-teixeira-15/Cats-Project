@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,9 +19,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.catsapp.CatsList.CatListEntry
+import com.example.catsapp.CatsList.CatsListViewModel
 
 @Composable
-fun CatCard(breed: String, navController: NavController) {
+fun CatCard(
+    cat: CatListEntry, navController: NavController, viewModel: CatsListViewModel
+) {
+
+    val referenceImageId = cat.imageId
+    val imageEntry = viewModel.images[referenceImageId]
+
+
+    LaunchedEffect(referenceImageId) {
+        viewModel.loadImageById(referenceImageId)
+    }
+
     Box(
         Modifier
             .width(200.dp)
@@ -31,19 +45,22 @@ fun CatCard(breed: String, navController: NavController) {
                 .fillMaxWidth()
                 .height(188.dp)
                 .clip(RoundedCornerShape(10.dp))
-                .clickable(onClick = { navController.navigate("cat_details_screen/${breed}") })
+                .clickable(onClick = { navController.navigate("cat_details_screen/${cat.breed}") })
         ) {
+            if(imageEntry != null) {
             AsyncImage(
-                model = "https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg",
+                model = imageEntry,
                 contentDescription = "Cat photo",
                 contentScale = ContentScale.Crop, modifier = Modifier
                     .fillMaxWidth()
-            )
+            ) } else {
+                Text("Loading image...")
+            }
 
 
         }
         Text(
-            text = breed,
+            text = cat.breed,
             fontSize = 11.sp,
             modifier = Modifier
                 .align(Alignment.BottomCenter)

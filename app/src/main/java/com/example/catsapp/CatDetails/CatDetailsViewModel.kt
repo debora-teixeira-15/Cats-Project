@@ -19,7 +19,6 @@ class CatDetailsViewModel(val repository: CatsRepository) : ViewModel() {
             val result = repository.getSpecificBreed(breedName)
             when (result) {
                 is Resource.Success<*> -> {
-                    Log.d("response", result.toString())
                     val newCatInfo = CatDetailsEntry(
                         result.data!![0].origin,
                         result.data[0].temperament,
