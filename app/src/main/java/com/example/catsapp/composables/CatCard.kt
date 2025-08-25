@@ -21,7 +21,6 @@ import coil.compose.AsyncImage
 
 @Composable
 fun CatCard(breed: String, navController: NavController) {
-    val catName = "test"
     Box(
         Modifier
             .width(200.dp)
@@ -32,7 +31,7 @@ fun CatCard(breed: String, navController: NavController) {
                 .fillMaxWidth()
                 .height(188.dp)
                 .clip(RoundedCornerShape(10.dp))
-                .clickable(onClick = { navController.navigate("cat_details_screen/${catName}") })
+                .clickable(onClick = { navController.navigate("cat_details_screen/${breed}") })
         ) {
             AsyncImage(
                 model = "https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg",

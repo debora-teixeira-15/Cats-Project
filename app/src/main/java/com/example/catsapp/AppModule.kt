@@ -1,5 +1,6 @@
 package com.example.catsapp
 
+import com.example.catsapp.CatDetails.CatDetailsViewModel
 import com.example.catsapp.CatsList.CatsListViewModel
 import com.example.catsapp.data.CatsApi
 import com.example.catsapp.data.repository.CatsRepository
@@ -12,6 +13,7 @@ val appModule = module {
     single<CatsApi> { provideCatsApi() }
     single<CatsRepository> { CatsRepository(get()) }
     viewModel<CatsListViewModel> { CatsListViewModel(get()) }
+    viewModel<CatDetailsViewModel> { CatDetailsViewModel(get()) }
 }
 
 private fun provideCatsApi(): CatsApi {

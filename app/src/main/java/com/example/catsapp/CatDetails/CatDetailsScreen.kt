@@ -18,9 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.catsapp.composables.FavoriteButton
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun CatDetailsScreen() {
+fun CatDetailsScreen(breedName: String, viewModel: CatDetailsViewModel = koinViewModel() ) {
+
+    viewModel.loadSpecificCat(breedName)
+    val catInfo = viewModel.catBreed
+
     Box(modifier = Modifier.padding(15.dp)) {
         Column(
             modifier = Modifier
@@ -29,7 +34,7 @@ fun CatDetailsScreen() {
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = "Breed name",
+                    text = breedName,
                     modifier = Modifier.weight(1f),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -47,25 +52,25 @@ fun CatDetailsScreen() {
                     .align(Alignment.CenterHorizontally)
                     .size(270.dp)
             )
-            DetailsSection()
+            DetailsSection(catInfo)
         }
     }
 }
 
 @Composable
-private fun DetailsSection() {
+private fun DetailsSection(catInfo: CatDetailsEntry) {
     Box(modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
         Column {
             Text(
-                text = "Origin",
+                text = "Origin: " + catInfo.origin,
                 fontSize = 12.sp
             )
             Text(
-                text = "Temperament",
+                text = "Temperament: " + catInfo.temperament,
                 fontSize = 12.sp
             )
             Text(
-                text = "Description",
+                text = "Description: " + catInfo.description,
                 fontSize = 12.sp
             )
         }

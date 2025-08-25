@@ -29,15 +29,15 @@ class MainActivity : ComponentActivity() {
                         CatsListScreen(navController)
                     }
                     composable(
-                        "cat_details_screen/{catName}",
-                        arguments = listOf(navArgument("catName") {
+                        "cat_details_screen/{breedName}",
+                        arguments = listOf(navArgument("breedName") {
                             type = NavType.StringType
                         })
                     ) {
-                        val catName = remember {
-                            it.arguments?.getString("catName")
+                        val breedName = remember {
+                            it.arguments?.getString("breedName")
                         }
-                        CatDetailsScreen()
+                        CatDetailsScreen(breedName!!)
                     }
                 }
             }

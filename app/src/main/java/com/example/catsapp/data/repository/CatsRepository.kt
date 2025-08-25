@@ -17,4 +17,13 @@ class CatsRepository(
         }
         return Resource.Success(response)
     }
+
+    suspend fun getSpecificBreed(id: String) : Resource<List<BreedsItem>> {
+        val response = try {
+            catsApi.getSpecificBreed(id)
+        } catch (e: kotlin.Exception) {
+            return Resource.Error("Error: " + e.message)
+        }
+        return Resource.Success(response)
+    }
 }
