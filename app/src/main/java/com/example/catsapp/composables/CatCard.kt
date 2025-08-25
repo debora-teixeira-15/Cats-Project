@@ -28,7 +28,7 @@ fun CatCard(url: String) {
         ) {
             AsyncImage(
                 model = url,
-                contentDescription = "Autumn Collection photo",
+                contentDescription = "Cat photo",
                 contentScale = ContentScale.Crop, modifier = Modifier
                     .fillMaxWidth()
             )

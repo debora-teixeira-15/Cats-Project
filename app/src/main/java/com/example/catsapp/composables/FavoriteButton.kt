@@ -22,7 +22,7 @@ fun FavoriteButton() {
     Image(
         imageVector = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
         contentDescription = "Favorite",
-        colorFilter = ColorFilter.tint(if (isFavorite) Color.Red else Color.Gray),
+        colorFilter = ColorFilter.tint(if (isFavorite) Color.Red else Color.LightGray),
         modifier = Modifier.clickable {
             isFavorite = !isFavorite
         }

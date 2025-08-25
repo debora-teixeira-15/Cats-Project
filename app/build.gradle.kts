@@ -57,6 +57,7 @@ dependencies {
     implementation("io.insert-koin:koin-core")
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0")
+    implementation("androidx.compose.material3:material3:1.3.2")
     testImplementation(libs.junit)
     implementation(libs.coil.kt.compose)
     androidTestImplementation(libs.androidx.junit)
