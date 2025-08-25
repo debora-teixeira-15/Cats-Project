@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.catsapp.CatDetails.CatDetailsScreen
+import com.example.catsapp.CatsList.CatsListScreen
 import com.example.catsapp.ui.theme.CatsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,6 +26,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = "cats_list_screen"
                 ) {
                     composable("cats_list_screen") {
+                        CatsListScreen()
                     }
                     composable(
                         "cat_details_screen/{catName}",
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
                         val catName = remember {
                             it.arguments?.getString("catName")
                         }
+                        CatDetailsScreen()
                     }
                 }
             }
